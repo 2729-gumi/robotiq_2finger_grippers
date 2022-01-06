@@ -42,9 +42,16 @@ class Robotiq2FingerGripper:
         self.message.append(self.rSP)
         self.message.append(self.rFR)   
 
-    def sendCommand(self):
+        self.already_sent = False
+
+    def sendCommand(self, forced=False):
         """Send the command to the Gripper."""    
-        return self.client.sendCommand(self.message)
+        if self.already_sent and not forced:
+            return True
+        success = self.client.sendCommand(self.message)
+        if success:
+            self.already_sent = True
+        return success
 
 
     def getStatus(self):
