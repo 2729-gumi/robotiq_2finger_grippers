@@ -44,8 +44,11 @@ The end user should not need to use this class direcly since an instance of it i
 controlling a given gripper, and commanded by the user commands puubished by an action client instance.  
 """
 
-from robotiq_2f_gripper import Robotiq2FingerGripper
-from robotiq_2f_gripper_msgs.msg import RobotiqGripperCommand, RobotiqGripperStatus, CommandRobotiqGripperGoal
+import sys
+if sys.version_info.major == 2:
+    from robotiq_2f_gripper import Robotiq2FingerGripper
+else: # Python 3.x
+    from .robotiq_2f_gripper import Robotiq2FingerGripperfrom robotiq_2f_gripper_msgs.msg import RobotiqGripperCommand, RobotiqGripperStatus, CommandRobotiqGripperGoal
 from sensor_msgs.msg import JointState
 import numpy as np
 import rospy
